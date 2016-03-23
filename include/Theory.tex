@@ -1,0 +1,155 @@
+% CREATED BY DAVID FRISK, 2015
+\chapter{Theory}
+Our thesis and start of the "red thread" throughout our report.
+
+\section{Database Management Systems}
+\todo[inline]{Ha en Introduktion om DBMS där vi går igenom vad de gör och vad de är. TEORI OM DMBS. Riktar vi mot oss dom som kan DBMS eller dom som inte vet vad det är?}
+Explain briefly the use of DBMS and what they are meant to do.
+
+\subsection{Structured Query Language}
+% Taskman & Erik
+Sql is the most well known query language and is originally based on relational algebra. Elaborate...
+
+\subsubsection{MySQL - Relational}
+% Taskman and Erik
+Early as 1970 Edgar F. Codd published a paper named, “A Relational Model of Data for Large Shared Data Banks”, where he showed how to access information in databases without knowing the structure of the information. That was the start of the relational database technology.
+
+A relational database is a model that organizes data into tables, where every row in these tables must have a unique key. A table represent an entity and every entity is referred to as a relation, a collection data of the same type. When two or more tables of data connects, a relationship of these tables are established and that is the core of a relational database.
+
+MySQL...
+
+%http://www-03.ibm.com/ibm/history/ibm100/us/en/icons/reldb/
+
+\subsection{NoSQL}
+% Pedram
+\todo[inline]{Vi har inte definierat NoSQL osv förkortningar. Beskriv facktermer. Många förkortningar nämns bara.}
+\todo[inline]{Svårförståeligt för oinsatta. Kanske förklara algoirtmerna internt i dessa lösningar, men bara om det ger ett bra djup i texten. Vad är vinsten med de olika teknikerna? En tabell med +/- ? Olika sökningsmetoder kanske bör beskrivas. }
+Since the first commercial implementation of the relational database was released by Oracle in 1979, the industry and the choice of companies database solutions has been dominated by the relational database model.
+However, today’s business world is undergoing massive change and the industry as a whole is moving towards the Digital Economy. Nowadays, companies run their businesses and interact with customers primarily through web, mobile  and IoT applications, which imposes greater demands on performance and creates new technology requirements. 
+Below is a list of common technological requirements of modern apps:\\
+% source for list: http://www.couchbase.com/nosql-resources/what-is-no-sql 
+
+\begin{itemize}
+  \item Support large numbers of concurrent users (tens of thousands, perhaps millions)
+  \item Deliver highly responsive experiences to a globally distributed base of users
+  \item Be always available – no downtime
+  \item Handle semi- and unstructured data
+  \item Rapidly adapt to changing requirements with frequent updates and new features\\
+\end{itemize}
+
+These requirements requires unprecedented levels of scale, speed, and data variability, which relational databases are not able to meet. These circumstances made companies to invest in a new database technology, NoSQL.
+\\[0.5cm]
+Unlike SQL, NoSQL is a term for various types of databases, each with their own specific attribute. Below is a list of common types of NoSQL databases which will be presented in more detail:
+\\
+\begin{itemize}
+  \item Graph database - Neo4J
+  \item Key-Value store - CouchDB
+  \item Column store - Cassandra
+  \item Document database - MongoDB\\
+\end{itemize}
+The main difference between SQL and NoSQL is how their data models are designed. Unlike relational database where you have a fixed model which is based on static schemas and relationships, in NoSQL,  the data model is more flexible and does not require predefined schemas. By using the schema-less model users are able to make modifications in their database in real-time which fits well with agile development. Due to the flexible data model, modifications in the applications makes no interruptions in the development and less database administrator time is needed.\\\\
+In addition to the scheme-less model Auto-sharding is another great feature, which is a major benefit to have in today’s business world where amount of users online is more than ever which forces databases to scale across multiple data centers and clouds. Auto-sharding exists natively in NoSQL databases, and automatically spread data across an arbitrary number of servers without requiring the application to even be aware of the composition of the servers.
+
+\subsubsection{Cassandra - Column}
+% Victor
+The power and advantage of Apache Cassandra comes from it being a distributed database system with a masterless node hierarchy. This means that the data is distributed between...    
+
+\subsubsection{Neo4j - Graph} %% Insert Images from Neo4j portal %%
+Graph databases are not so surprisingly built upon the idea of graphs. In our everyday life we can see many references to graphs and this common occurrence is why it can sometimes be easier to model something in a graph database. One area where graph databases really stands out is more complex querying of relationships. 
+\\[0.5cm]
+The leading graph database today is Neo4j, which was released in 2010. 
+\\[0.5cm]
+Differences to RDBMS
+\begin{itemize}
+  \item Built on relationships, not entities.
+  \item Does not slow down by increasing data sets the same way RDBMS does. The reason behind this is that Neo4j slows down by increasing nodes that needs to be traversed, not the total of nodes. 
+  \item Schema-free, which means it is more flexible to add to a graph model.
+\end{itemize}
+The most adopted graph data model is called "labeled property graph model" where a model is defined as an abstraction or simplification of the real world. This data model is made up of nodes, relationships, properties and labels. Nodes contains properties, or otherwise called key-value pairs. Nodes can also be tagged with one or more labels which indicates roles. The relationships in this model connect the different nodes. A relationship has a direction, name, start node and an end node. Like nodes, relationships may also have properties (quality, weight, etc.).
+\\
+Example\\
+    Adam -- fatherTo --> Stefan
+\\[0.5cm]
+The standard query language in Neo4j is Cypher. It is graphically based to add sensibility to the user, mainly because the database viewer is very illustrative and shows graphs as interactive graphs. The syntax is showed below.\\
+Example
+\begin{lstlisting}
+MATCH   (a:Person {name: 'Jim'})-[:KNOWS]->(b)-[:KNOWS]->(c),
+        (a)-[:KNOWS]->(c)
+RETURN  b, c
+\end{lstlisting}
+Cypher's keywords are very similar to other query languages and they are:
+\begin{itemize}
+  \item WHERE
+  \item CREATE and CREATE UNIQUE
+  \item MERGE
+  \item DELETE
+  \item SET
+  \item FOREACH
+  \item UNION
+  \item WITH
+  \item START\\
+\end{itemize}
+Validation of a graph model is pretty loosely defined and the best way is to begin at the start node and follow its path reading each node and relationship labels along the way. If this creates sensible sentences, then the model should be a good representation. 
+The other possible way is to describe the queries you want in Cypher and if you can it can help ensure the model is correct. 
+\\[0.5cm]
+Below are some additional features for Neo4j that is worth mentioning but will not be explained in detail.\
+\begin{itemize}
+  \item Constraints
+  \item Indexing
+  \item Aggregations
+  \item Query chaining\\
+\end{itemize}
+Common use cases for Neo4j and graph databases in general is in social (for user relations), recommendation and for geospatial sites (linked places). The largest reason for the effectiveness in these areas are because of the graph and tree related algorithms that are done. The majority of spatial and relation based algorithms are graph and tree based. 
+\\[0.5cm]
+The strongest part of Neo4j is the effectiveness of advanced relational queries and the simplicity of the models. The weaker points are that it is fairly new and not as well built as more mature technologies. 
+
+% Source - Neo4j book
+
+\subsubsection{MongoDB - Document}
+% Pedram - Introduction of MongoDB.
+MongoDB uses the document data model to store its data and is one of the leading NoSQL databases in the industry. In contrast to the relational databases, which consists of the traditional tables, rows, columns, and table joins, MongoDB is composed of collections, documents, fields and embedded documents. Before an in-depth introduction of the MongoDB concepts, analyze the table below which shows the relationship of RDBMs terminology with MongoDB:\\
+\begin{table}[h] % Source of table: http://www.tutorialspoint.com/mongodb/mongodb_overview.htm 
+\centering
+\caption{Relationship of RDBMs terminology with MongoDB}
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{1}{|c|}{\textbf{RDBMS}} & \multicolumn{1}{c|}{\textbf{MongoDB}} \\ \hline
+Database                             & Database \\ \hline
+Table                                & Collection \\ \hline
+Tuple/Row/Record                     & Document \\ \hline
+Column                               & Field \\ \hline
+Table Join                           & Embedded Documents \\ \hline
+Primary Key                          & \textit{Primary Key (Default key \_id provided by mongodb itself)} \\ \hline
+\end{tabular}
+\end{table} \\
+A collection can be seen as a container for the MongoDB documents and since it is a NoSQL database, no predefined schemas are required. MongoDB store its data as documents and documents have dynamic schema, which means that documents in same collection can have different set of fields.\\ As stated in the table, documents in MongoDB are equivalent to rows and its associated data in a relational database model. However, there are some distinctions and primarily the ability to store complex information such as lists and dictionaries in a document...
+
+\subsubsection{CouchDB - Key-value}
+% Arneson
+CouchDB is a schemaless NoSQL database system build for the web. Data is stored as JSON just like it is in mongoDB but with several differences. 
+\bigskip
+
+Main concepts of CouchDB
+\begin{itemize}
+  \item Documents stored as JSON
+  \item Views very like those used in SQL but with very important responsibilities when it comes to querying of the database. The views are constructed using JSON and javascript. 
+  \item Distribution, calculations and replicas of the database are spread out over all servers and all clients. All hosts (servers and clients) maintain their own local copy of the database to which they have full CRUD-possibilities (Create, Read, Update, Delete).
+  These partitions of the database synchronize both ways as soon as the hosts are connected to each other again.
+  \item MapReduce, a technology used to make it possible to split up queries and run them on several CPU cores in parallel. A map function loops over the entire set of objects and for each item in the original set outputs a version of the item and a key identifying it. MapReduce then groups the outputs by their key values and runs these subsets through the reduce function which is the one doing the chosen calculation. Since this reduce function operates on subsets it can be distributed to run on different CPU cores. 
+  \item Implemented in Erlang. CouchDB is implemented in the Erlang programming language. This was chosen because of Erlangs built-in support for concurrency, distribution and fault toleration. Erlang is also widely used in the telecommunications industry. 
+  %källa https://cwiki.apache.org/confluence/display/COUCHDB/Introduction
+\end{itemize}
+
+\section{Virtual Machines}
+% Joakim
+Short description of VMs and how they behave with DBMS on them.
+% Se http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=1430629
+\subsection{DigitalOcean} 
+Explain DigitalOcean.
+\subsubsection{Hardware}
+Explain VirtualBox
+\subsubsection{Software} 
+Explain Vagrant
+\subsubsection{Setup} 
+Code..
